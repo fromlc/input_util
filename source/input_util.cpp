@@ -54,6 +54,7 @@ int getConsoleInt(int& intInput) {
 		if (validateInput(intInput)) {
 			return true;
 		}
+		// numeric value failed validation
 		cerr << g_errorPrompt << '\n';
 
 	} while (true);
