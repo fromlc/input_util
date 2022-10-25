@@ -19,14 +19,9 @@ using std::string;
 using std::stringstream;	// for string to int conversion
 
 //------------------------------------------------------------------------------
-// constants
-//------------------------------------------------------------------------------
-static constexpr int BUFFER_SIZE = 32;
-
-//------------------------------------------------------------------------------
 // globals
 //------------------------------------------------------------------------------
-static char g_input[BUFFER_SIZE];
+static char g_input[IU_BUFFER_SIZE];
 static string g_intPrompt = "Enter a positive integer or Q to quit: ";
 static string g_errorPrompt = "That's not a positive integer. Please try again.\n";
 
@@ -37,7 +32,7 @@ int getConsoleInt(int& intInput) {
 
 	do {
 		cout << g_intPrompt;
-		cin.getline(g_input, BUFFER_SIZE);
+		cin.getline(g_input, IU_BUFFER_SIZE);
 		stringstream ss(g_input);
 
 		// check for user wants to quit
