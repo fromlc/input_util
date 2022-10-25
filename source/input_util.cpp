@@ -50,6 +50,7 @@ int getConsoleInt(int& intInput) {
 			continue;
 		}
 
+		// valid numeric input was entered
 		if (validateInput(intInput)) {
 			return true;
 		}
