@@ -12,7 +12,7 @@ int main() {
 
 	int myInt = getConsoleInt();
 
-	// now you have positive int input to process
+	// process positive int input
 
 	cout << "\nYou entered: " << myInt << '\n';
 
