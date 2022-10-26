@@ -25,11 +25,11 @@ using std::stringstream;	// for string to int conversion
 // constants
 //------------------------------------------------------------------------------
 constexpr int IU_BUFFER_SIZE = 32;
+constexpr int IU_CONTROL_C = 1;
 
 //------------------------------------------------------------------------------
 // function prototypes
 //------------------------------------------------------------------------------
 int getConsoleInt();
-bool validateInput(int intInput);
 
 #endif // !INPUT_UTIL_H

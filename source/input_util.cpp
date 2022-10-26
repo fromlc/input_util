@@ -16,14 +16,17 @@ static string g_errorPrompt = "That's not a positive integer. Please try again.\
 // local function prototypes
 //------------------------------------------------------------------------------
 bool getConsoleIntLoop(int& intInput);
+bool validateInput(int intInput);
 
 //------------------------------------------------------------------------------
 // handler for ctrl-c console input
 //------------------------------------------------------------------------------
 namespace {
-	void handleCtrlC(int s) {
-		if (s == SIGINT) {
-			exit(1);
+	volatile sig_atomic_t keepRunning = 1;
+
+	void handleCtrlC(int x) {
+		if (x == SIGINT) {
+			keepRunning = 0;
 		}
 	}
 }
@@ -63,9 +66,14 @@ bool getConsoleIntLoop(int& intInput) {
 			ss >> intInput;
 		}
 		catch (stringstream::failure e) {
-			// check for non-empty ss that contains ctrl-c
-			cerr << g_errorPrompt << '\n';
-			continue;
+			if (keepRunning) {
+				cerr << g_errorPrompt << '\n';
+				continue;
+			}
+			else {
+				cerr << "^C\n";
+				exit(IU_CONTROL_C);
+			}
 		}
 
 		// valid numeric input was entered
