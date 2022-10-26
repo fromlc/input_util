@@ -9,13 +9,10 @@
 // entry point
 //------------------------------------------------------------------------------
 int main() {
-	// set up ctrl-c handler
-	signal(SIGINT, handleCtrlC);
 
-	int myInt;
-	while (!getConsoleInt(myInt));
+	int myInt = getConsoleInt();
 
-	// after the while loop you have positive int input to process
+	// now you have positive int input to process
 
 	return 0;
 }

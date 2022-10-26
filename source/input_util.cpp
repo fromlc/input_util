@@ -13,9 +13,38 @@ static string g_intPrompt = "Enter a positive integer or Q to quit: ";
 static string g_errorPrompt = "That's not a positive integer. Please try again.\n";
 
 //------------------------------------------------------------------------------
+// local function prototypes
+//------------------------------------------------------------------------------
+bool getConsoleIntLoop(int& intInput);
+
+//------------------------------------------------------------------------------
+// handler for ctrl-c console input
+//------------------------------------------------------------------------------
+namespace {
+	void handleCtrlC(int s) {
+		if (s == SIGINT) {
+			exit(1);
+		}
+	}
+}
+
+//------------------------------------------------------------------------------
 // get one positive integer from console input
 //------------------------------------------------------------------------------
-int getConsoleInt(int& intInput) {
+int getConsoleInt() {
+	// set up ctrl-c handler
+	signal(SIGINT, handleCtrlC);
+
+	int intInput;
+	while (getConsoleIntLoop(intInput));
+
+	return intInput;
+}
+
+//------------------------------------------------------------------------------
+// loop to get positive integer input
+//------------------------------------------------------------------------------
+bool getConsoleIntLoop(int& intInput) {
 
 	// loop to get positive integer input
 	do {
@@ -34,11 +63,9 @@ int getConsoleInt(int& intInput) {
 			ss >> intInput;
 		}
 		catch (stringstream::failure e) {
-			//cerr << e.what() << '\n';
-			if (ss.str().front() != SIGINT) {
-				cerr << g_errorPrompt << '\n';
-				continue;
-			}
+			// check for non-empty ss that contains ctrl-c
+			cerr << g_errorPrompt << '\n';
+			continue;
 		}
 
 		// valid numeric input was entered

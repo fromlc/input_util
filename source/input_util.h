@@ -27,21 +27,9 @@ using std::stringstream;	// for string to int conversion
 constexpr int IU_BUFFER_SIZE = 32;
 
 //------------------------------------------------------------------------------
-// handler for ctrl-c console input
-//------------------------------------------------------------------------------
-namespace {
-	void handleCtrlC(int s) {
-		if (s == SIGINT) {
-			cout << "^C" << endl;
-			exit(1);
-		}
-	}
-}
-
-//------------------------------------------------------------------------------
 // function prototypes
 //------------------------------------------------------------------------------
-int getConsoleInt(int& intInput);
+int getConsoleInt();
 bool validateInput(int intInput);
 
 #endif // !INPUT_UTIL_H
