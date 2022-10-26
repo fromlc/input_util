@@ -14,6 +14,8 @@ int main() {
 
 	// now you have positive int input to process
 
+	cout << "\nYou entered: " << myInt << '\n';
+
 	return 0;
 }
 
