@@ -9,6 +9,8 @@
 // entry point
 //------------------------------------------------------------------------------
 int main() {
+	// set up ctrl-c handler
+	signal(SIGINT, handleCtrlC);
 
 	int myInt;
 	while (!getConsoleInt(myInt));
