@@ -47,18 +47,13 @@ int getConsoleInt() {
 //------------------------------------------------------------------------------
 bool getConsoleIntLoop(int& intInput) {
 
-	stringstream ss;
-	// register the exceptions we want to handle
-	ss.exceptions(stringstream::failbit | stringstream::badbit);
-
 	do {
-		// clear stringstream error bits and data
-		ss.clear();
-		ss.str(string());
-
 		cout << g_intPrompt;
 		cin.getline(g_input, IU_BUFFER_SIZE);
-		ss << g_input;
+		stringstream ss(g_input);
+
+		// register the exceptions we handle in catch blocks
+		ss.exceptions(stringstream::failbit | stringstream::badbit);
 
 		// check for user wants to quit
 		if (!ss.str().compare("q") || !ss.str().compare("Q"))
