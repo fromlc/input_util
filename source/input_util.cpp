@@ -9,8 +9,6 @@
 // globals
 //------------------------------------------------------------------------------
 static char g_input[IU_BUFFER_SIZE];
-static string g_intPrompt = "Enter a positive integer or Q to quit: ";
-static string g_errorPrompt = "That's not a positive integer. Please try again.\n";
 
 //------------------------------------------------------------------------------
 // local function prototypes

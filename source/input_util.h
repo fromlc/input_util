@@ -28,6 +28,12 @@ constexpr int IU_BUFFER_SIZE = 32;
 constexpr int IU_CONTROL_C = 1;
 
 //------------------------------------------------------------------------------
+// globals
+//------------------------------------------------------------------------------
+const string g_intPrompt = "\nEnter a positive integer or Q to quit: ";
+const string g_errorPrompt = "That's not a positive integer.";
+
+//------------------------------------------------------------------------------
 // function prototypes
 //------------------------------------------------------------------------------
 int getConsoleInt();
