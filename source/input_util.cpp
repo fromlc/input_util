@@ -39,7 +39,7 @@ int getConsoleInt() {
 	signal(SIGINT, handleCtrlC);
 
 	int intInput;
-	while (getConsoleIntLoop(intInput));
+	while (!getConsoleIntLoop(intInput));
 
 	return intInput;
 }
