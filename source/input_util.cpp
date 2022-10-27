@@ -52,7 +52,7 @@ bool getConsoleIntLoop(int& intInput) {
 		cin.getline(g_input, IU_BUFFER_SIZE);
 		stringstream ss(g_input);
 
-		// register the exceptions we handle in catch blocks
+		// register exceptions we handle in catch blocks
 		ss.exceptions(stringstream::failbit | stringstream::badbit);
 
 		// check for user wants to quit
