@@ -8,7 +8,7 @@
 //------------------------------------------------------------------------------
 // globals
 //------------------------------------------------------------------------------
-static char g_input[IU_BUFFER_SIZE];
+string g_input;
 
 //------------------------------------------------------------------------------
 // local function prototypes
@@ -18,6 +18,8 @@ bool validateInput(int intInput);
 
 //------------------------------------------------------------------------------
 // handler for ctrl-c console input
+// 
+// sets keepRunning 0 on ctrl-c entered
 //------------------------------------------------------------------------------
 namespace {
 	volatile sig_atomic_t keepRunning = 1;
@@ -49,7 +51,7 @@ bool getConsoleIntLoop(int& intInput) {
 
 	do {
 		cout << g_intPrompt;
-		cin.getline(g_input, IU_BUFFER_SIZE);
+		getline(cin, g_input);
 		stringstream ss(g_input);
 
 		// register exceptions we handle in catch blocks
@@ -67,6 +69,7 @@ bool getConsoleIntLoop(int& intInput) {
 				cerr << g_errorPrompt << '\n';
 				continue;
 			}
+			// signal was set
 			else {
 				cerr << "^C\n";
 				exit(IU_CONTROL_C);
