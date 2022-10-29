@@ -25,7 +25,9 @@ namespace {
 	volatile sig_atomic_t keepRunning = 1;
 
 	void handleCtrlC(int x) {
-		keepRunning = 0;
+		if (x == SIGINT) {
+			keepRunning = 0;
+		}
 	}
 }
 
@@ -64,7 +66,6 @@ bool _getConsoleInt(int& intInput) {
 
 	try {
 		ss >> intInput;
-		// valid numeric input was entered
 		return validateInput(intInput);
 	}
 	catch (stringstream::failure e) {
@@ -76,8 +77,8 @@ bool _getConsoleInt(int& intInput) {
 			cerr << "^C\n";
 			exit(IU_CONTROLC);
 		}
+		return false;
 	}
-	return false;
 }
 
 //------------------------------------------------------------------------------
