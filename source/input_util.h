@@ -25,9 +25,9 @@ using std::stringstream;	// for string to int conversion
 //------------------------------------------------------------------------------
 // constants
 //------------------------------------------------------------------------------
-constexpr int IU_CONTROLC = 1;
-constexpr int IU_OK = 0;
-constexpr int IU_WAIT = 1000000;
+constexpr int IU_CONTROLC = 1;		// control-c exit code
+constexpr int IU_OK = 0;			// user quits exit code
+constexpr int IU_WAIT = 1000000;	// timing loop waits for ctrl-c signal
 //------------------------------------------------------------------------------
 // globals
 //------------------------------------------------------------------------------
