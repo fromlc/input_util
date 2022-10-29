@@ -38,5 +38,6 @@ const string g_errorPrompt = "That's not a positive integer.";
 // function prototypes
 //------------------------------------------------------------------------------
 int getConsoleInt();
+bool validateInt(int intInput);
 
 #endif // !INPUT_UTIL_H

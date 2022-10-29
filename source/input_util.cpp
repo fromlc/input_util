@@ -14,7 +14,6 @@ string g_input;
 // local function prototypes
 //------------------------------------------------------------------------------
 bool _getConsoleInt(int& intInput);
-bool validateInput(int intInput);
 
 //------------------------------------------------------------------------------
 // handler for ctrl-c console input
@@ -66,7 +65,7 @@ bool _getConsoleInt(int& intInput) {
 
 	try {
 		ss >> intInput;
-		return validateInput(intInput);
+		return validateInt(intInput);
 	}
 	catch (stringstream::failure e) {
 		// timing loop
@@ -84,9 +83,7 @@ bool _getConsoleInt(int& intInput) {
 //------------------------------------------------------------------------------
 // positive integer input validation
 //------------------------------------------------------------------------------
-bool validateInput(int intInput) {
+bool validateInt(int intInput) {
 
 	return (intInput >= 0) ? true : false;
 }
-
-
