@@ -13,7 +13,7 @@ string g_input;
 //------------------------------------------------------------------------------
 // local function prototypes
 //------------------------------------------------------------------------------
-bool getConsoleIntLoop(int& intInput);
+bool _getConsoleInt(int& intInput);
 bool validateInput(int intInput);
 
 //------------------------------------------------------------------------------
@@ -25,9 +25,7 @@ namespace {
 	volatile sig_atomic_t keepRunning = 1;
 
 	void handleCtrlC(int x) {
-		if (x == SIGINT) {
-			keepRunning = 0;
-		}
+		keepRunning = 0;
 	}
 }
 
@@ -39,51 +37,47 @@ int getConsoleInt() {
 	signal(SIGINT, handleCtrlC);
 
 	int intInput;
-	while (!getConsoleIntLoop(intInput));
+	while (!_getConsoleInt(intInput)) {
+		cerr << g_errorPrompt << '\n';
+	}
 
+	// return validated int
 	return intInput;
 }
 
 //------------------------------------------------------------------------------
 // loop to get positive integer input
 //------------------------------------------------------------------------------
-bool getConsoleIntLoop(int& intInput) {
+bool _getConsoleInt(int& intInput) {
 
-	do {
-		cout << g_intPrompt;
-		getline(cin, g_input);
-		stringstream ss(g_input);
+	// ask user to enter an int
+	cout << g_intPrompt;
+	getline(cin, g_input);
+	stringstream ss(g_input);
 
-		// register exceptions we handle in catch blocks
-		ss.exceptions(stringstream::failbit | stringstream::badbit);
+	// register exceptions we handle in catch blocks
+	ss.exceptions(stringstream::failbit | stringstream::badbit);
 
-		// check for user wants to quit
-		if (!ss.str().compare("q") || !ss.str().compare("Q"))
-			return false;
+	// check for user wants to quit
+	if (!ss.str().compare("q") || !ss.str().compare("Q"))
+		exit(IU_OK);
 
-		try {
-			ss >> intInput;
-		}
-		catch (stringstream::failure e) {
-			if (keepRunning) {
-				cerr << g_errorPrompt << '\n';
-				continue;
-			}
-			// signal was set
-			else {
-				cerr << "^C\n";
-				exit(IU_CONTROL_C);
-			}
-		}
-
+	try {
+		ss >> intInput;
 		// valid numeric input was entered
-		if (validateInput(intInput)) {
-			return true;
-		}
-		// numeric value failed validation
-		cerr << g_errorPrompt << '\n';
+		return validateInput(intInput);
+	}
+	catch (stringstream::failure e) {
+		// timing loop
+		for (int i = 0; i < IU_WAIT; i++);
 
-	} while (true);
+		if (!keepRunning) {
+			// signal was set
+			cerr << "^C\n";
+			exit(IU_CONTROLC);
+		}
+	}
+	return false;
 }
 
 //------------------------------------------------------------------------------
