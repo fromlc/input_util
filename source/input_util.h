@@ -30,15 +30,11 @@ constexpr int IU_OK = 0;			// user quits exit code
 constexpr int IU_WAIT = 1000000;	// timing loop waits for ctrl-c signal
 
 //------------------------------------------------------------------------------
-// globals
-//------------------------------------------------------------------------------
-const string g_intPrompt = "\nEnter a positive integer or Q to quit: ";
-const string g_errorPrompt = "That's not a positive integer.";
-
-//------------------------------------------------------------------------------
 // function prototypes
 //------------------------------------------------------------------------------
-int getConsoleInt();
+// prompt is an optional parameter, g_intPrompt used by default
+int getConsoleInt(const string& promptStr = "");
 bool validateInt(int intInput);
+void setErrorPrompt(const string& errorStr);
 
 #endif // !INPUT_UTIL_H

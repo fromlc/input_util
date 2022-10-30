@@ -6,11 +6,21 @@
 #include "input_util.h"		// input util function prototypes
 
 //------------------------------------------------------------------------------
+// globals
+//------------------------------------------------------------------------------
+const string g_intPrompt = "\nEnter a positive integer (Q quits): ";
+const string g_errorPrompt = "That's not a positive integer.";
+
+//------------------------------------------------------------------------------
 // entry point
 //------------------------------------------------------------------------------
 int main() {
 
-	int myInt = getConsoleInt();
+	// getConsoleInt() displays this string on bad input
+	setErrorPrompt(g_errorPrompt);
+
+	// getConsoleInt() prompts for int input with this string
+	int myInt = getConsoleInt(g_intPrompt);
 
 	// process positive int input
 

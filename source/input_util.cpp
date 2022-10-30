@@ -9,6 +9,9 @@
 // globals
 //------------------------------------------------------------------------------
 string g_input;
+string g_intPrompt = "\nEnter a positive integer or Q to quit: ";
+string g_errorPrompt = "That's not a positive integer.";
+
 
 //------------------------------------------------------------------------------
 // local function prototypes
@@ -33,7 +36,11 @@ namespace {
 //------------------------------------------------------------------------------
 // get one positive integer from console input
 //------------------------------------------------------------------------------
-int getConsoleInt() {
+int getConsoleInt(const string& promptStr) {
+
+	// set user prompt to passed string
+	g_intPrompt = promptStr;
+
 	// set up ctrl-c handler
 	signal(SIGINT, handleCtrlC);
 
@@ -87,3 +94,11 @@ bool validateInt(int intInput) {
 
 	return (intInput >= 0) ? true : false;
 }
+
+//------------------------------------------------------------------------------
+// set prompt for use on input error
+//------------------------------------------------------------------------------
+void setErrorPrompt(const string& errorStr) {
+	g_errorPrompt = errorStr;
+}
+
