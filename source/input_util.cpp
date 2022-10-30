@@ -54,6 +54,8 @@ int getConsoleInt(const string& prompt) {
 
 //------------------------------------------------------------------------------
 // loop to get positive integer input
+// 
+// throws UserQuitException on quit command
 //------------------------------------------------------------------------------
 bool _getConsoleInt(int& intInput) {
 
@@ -62,12 +64,12 @@ bool _getConsoleInt(int& intInput) {
 	getline(cin, g_input);
 	stringstream ss(g_input);
 
-	// register exceptions we handle in catch blocks
-	ss.exceptions(stringstream::failbit | stringstream::badbit);
-
 	// check for user wants to quit
 	if (!ss.str().compare("q") || !ss.str().compare("Q"))
-		exit(IU_OK);	// #TODO throw exception
+		throw UserQuitException();
+
+	// register exceptions we handle in catch blocks
+	ss.exceptions(stringstream::failbit | stringstream::badbit);
 
 	try {
 		ss >> intInput;

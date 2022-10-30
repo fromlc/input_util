@@ -19,12 +19,17 @@ int main() {
 	// getConsoleInt() displays this string on bad input
 	setErrorPrompt(g_errorPrompt);
 
-	// prompt for int input with this string
-	int myInt = getConsoleInt(g_intPrompt);
+	try {
+		// prompt for int input with this string
+		int myInt = getConsoleInt(g_intPrompt);
 
-	// process positive int input
+		// process positive int input
 
-	cout << "\nYou entered: " << myInt << '\n';
+		cout << "\nYou entered: " << myInt << '\n';
+	}
+	catch (UserQuitException& e) {
+		cout << e.what();
+	}
 
 	return 0;
 }
