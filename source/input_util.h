@@ -33,7 +33,7 @@ constexpr int IU_WAIT = 1000000;	// timing loop waits for ctrl-c signal
 // function prototypes
 //------------------------------------------------------------------------------
 // prompt is an optional parameter, g_intPrompt used by default
-int getConsoleInt(const string& promptStr = "");
+int getConsoleInt(const string& prompt = "Enter a positive integer (Q quits)");
 bool validateInt(int intInput);
 void setErrorPrompt(const string& errorStr);
 
