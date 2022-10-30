@@ -12,7 +12,6 @@ string g_input;
 string g_intPrompt = "\nEnter a positive integer or Q to quit: ";
 string g_errorPrompt = "That's not a positive integer.";
 
-
 //------------------------------------------------------------------------------
 // local function prototypes
 //------------------------------------------------------------------------------
@@ -68,7 +67,7 @@ bool _getConsoleInt(int& intInput) {
 
 	// check for user wants to quit
 	if (!ss.str().compare("q") || !ss.str().compare("Q"))
-		exit(IU_OK);
+		exit(IU_OK);	// #TODO throw exception
 
 	try {
 		ss >> intInput;

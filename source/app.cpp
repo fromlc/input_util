@@ -19,7 +19,7 @@ int main() {
 	// getConsoleInt() displays this string on bad input
 	setErrorPrompt(g_errorPrompt);
 
-	// getConsoleInt() prompts for int input with this string
+	// prompt for int input with this string
 	int myInt = getConsoleInt(g_intPrompt);
 
 	// process positive int input
